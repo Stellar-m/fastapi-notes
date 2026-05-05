@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from pydantic import BaseModel
 from sqlalchemy import DateTime, func, Integer, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -32,3 +33,16 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String(50), nullable=False)
+
+class NoteCreate(BaseModel):
+    title: str
+    content: str
+
+class NoteUpdate(BaseModel):
+    title: str
+    content: str
+
+class NoteOut(BaseModel):
+    id: int
+    title: str
+    content: str
